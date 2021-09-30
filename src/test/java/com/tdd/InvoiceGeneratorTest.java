@@ -5,10 +5,11 @@ import org.junit.jupiter.api.Test;
 
 public class InvoiceGeneratorTest {
     @Test
-    public void givenDistanceAndTime_shouldReturnTotalFare() {
-        InvoiceGenerator invoice = new InvoiceGenerator();
-        double distance = 2.0, time = 5.0;
-        double fare = invoice.calculateFare(distance, time);
-        Assertions.assertTrue(fare == 25);
+     public void givenDistanceAndTime_ShouldReturnTotalFare() {
+        InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
+        double distance = 2.0;
+        int time = 5;
+        double fare = invoiceGenerator.calculateFare(distance, time);
+        Assertions.assertEquals(25, fare);
     }
 }
