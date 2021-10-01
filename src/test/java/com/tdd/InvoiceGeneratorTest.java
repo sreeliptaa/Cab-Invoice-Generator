@@ -6,31 +6,25 @@ import org.junit.jupiter.api.Test;
 
 
 public class InvoiceGeneratorTest {
-    InvoiceGenerator invoiceGenerator = null;
+    InvoiceService invoiceService = null;
 
     @BeforeEach
     public void setUp() {
-        invoiceGenerator = new InvoiceGenerator();
+        invoiceService = new InvoiceService();
     }
 
     @Test
-    public void givenDistanceAndTime_ShouldReturnTotalFare() {
-        double distance = 2.0;
-        int time = 5;
-        double fare = invoiceGenerator.calculateFare(distance, time);
-        Assertions.assertEquals(25, fare);
-    }
-
-
-    @Test
-    public void givenMultipleRides_ShouldReturnInvoiceSummary() {
+    public void givenUserIdAndRides_ShouldReturnInvoiceSummary() {
+        String userId = "sree@gmail.com";
         Ride[] rides = {new Ride(2.0, 5),
                 new Ride(0.1, 1)
         };
-        InvoiceSummary actualSummary = invoiceGenerator.calculateFare(rides);
-        InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 27.0);
-        Assertions.assertEquals(expectedInvoiceSummary, actualSummary);
+        invoiceService.addRides(userId, rides);
+        InvoiceSummary summary = invoiceService.getInvoiceSummary(userId);
+        InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 30.0);
+        Assertions.assertEquals(expectedInvoiceSummary, summary);
     }
+
 }
 
 
