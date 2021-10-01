@@ -7,15 +7,22 @@ package com.tdd;
  */
 
 public class InvoiceGenerator {
-    private static final double RATE_PER_KM = 10.0, RATE_PER_MIN = 1.0;
+    private static final double MINIMUM_COST_PER_KM = 10;
+    private static final int COST_PER_TIME = 1;
 
     public static void main(String[] args) {
         System.out.println("Welcome to Cab Invoice Generator");
     }
 
-    public double calculateFare(double distanceInKm, double timeInMin) {
-        int minRate = 5;
-        double totalFare = RATE_PER_KM * distanceInKm + RATE_PER_MIN * timeInMin;
-        return minRate > totalFare ? minRate : totalFare;
+    public double calculateFare(double distance, int time) {
+        return distance * MINIMUM_COST_PER_KM + time * COST_PER_TIME;
+    }
+
+    public double calculateFare(Ride[] rides) {
+        double totalFare = 0;
+        for (Ride ride : rides) {
+            totalFare += this.calculateFare( ride.distance , ride.time );
+        }
+        return totalFare;
     }
 }
