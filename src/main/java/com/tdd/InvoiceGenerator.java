@@ -2,6 +2,7 @@ package com.tdd;
 
 /**
  * Purpose - To simulate a Cab Invoice Generator
+ *
  * @author - Sreelipta
  * @since - 2021-09-30
  */
@@ -18,11 +19,12 @@ public class InvoiceGenerator {
         return distance * MINIMUM_COST_PER_KM + time * COST_PER_TIME;
     }
 
-    public double calculateFare(Ride[] rides) {
+    public InvoiceSummary calculateFare(Ride[] rides) {
         double totalFare = 0;
         for (Ride ride : rides) {
-            totalFare += this.calculateFare( ride.distance , ride.time );
+            totalFare += this.calculateFare(ride.distance, ride.time);
         }
-        return totalFare;
+        return new InvoiceSummary(rides.length, totalFare);
     }
+
 }
